@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "lib": ["scripthost", "es2017", "dom"],
+        "typeRoots": [
+            "node_modules/discord.js/typings",
+            "node_modules/@types"
+        ],
+        "outDir": "dist/"
+    },
+    "input": [
+        "index.ts",
+        "spec/**/*.ts"
+    ]
+}
