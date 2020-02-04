@@ -1,4 +1,4 @@
-import * as Discord from 'discord.js'
+import * as Discord from 'discord.js';
 
 
 // Bot will only respond to messages in these channels
@@ -36,7 +36,7 @@ function main(): void {
 }
 
 
-export function respondToMessage(message: Discord.Message): string {
+export function respondToMessage(message: Discord.Message): string|null {
     if (message.channel instanceof Discord.TextChannel && SUPPORTED_CHANNELS.has(message.channel.name)) {
         const content = message.content;
         for (const [regex, response] of RESPONSES) {
@@ -56,7 +56,7 @@ export function replaceVariables(sourceMessage: Discord.Message, rawString: stri
         ['authorMention', `<@${sourceMessage.author.id}>`],
     ]);
 
-    return rawString.replace(/\{\{([^}]+)\}\}/, (match, varName) => {
+    return rawString.replace(/\{\{([^}]+)\}\}/g, (match, varName) => {
         return variableValues.get(varName) || varName;
     });
 }
