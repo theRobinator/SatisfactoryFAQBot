@@ -13,10 +13,10 @@ const doesNotWorkRegexBase = "mods?\\s+((doesn't|don't|does not|not|are not|aren
 const RESPONSES = new Map<RegExp, string>([
     [new RegExp(doesNotWorkRegexBase + '(multiplayer|mp)', 'i'), "Hey {{authorMention}}, mods don't work in multiplayer yet. Wait for SML 1.1+ to come out."],
     [new RegExp(doesNotWorkRegexBase + '(the\\s+)?experimental', 'i'), "Hey {{authorMention}}, mods don't work in experimental yet. Wait for SML 1.1+ to come out, and use Early Access until then."],
-    [/missing sid_p/i, 'Did you get a message about missing SID_p from your install? You need to install Satisfactory Item Dictionary from https://ficsit.app/mod/CkUs5KM9ShwVfr'],
+    [/missing sid(_p)?/i, 'Did you get a message about missing SID_p from your install? You need to install Satisfactory Item Dictionary from https://ficsit.app/mod/CkUs5KM9ShwVfr'],
     [/(where|how)\s+((can|do)\s+i|to)\s+(find|download|get)(\s+(the|a))?\s+mods?/i, 'Hey {{authorMention}}, you can find mods to download at https://ficsit.app'],
     [/((where|how)\s+((can|do)\s+i|to)|help\s*(me|(me\s*)?(with\s*)?)?)\s+(find(ing)?|download(ing)?|install(ing)?|get(ting)?|put|sav(e|ing))\s+(sml|xinput|satisfactory\s+mod\s+loader)/i, 'Hey {{authorMention}}, check out this video tutorial: https://www.youtube.com/watch?v=OTIIhwZG1Wk'],
-    [/(where|how)\s+((can|do)\s+i|to)\s+(start|learn( to)?|get started)\s+(modding|mak(e|ing) mods?|mod making)/i, "Hey {{authorMention}}, here are some resources for getting started modding:\nDocumentation: https://docs.ficsit.app\nSatisfactory Headers: https://sf-headers.ficsit.app\nSDK Headers: https://sdk-headers.ficsit.app"],
+    [/(where|how)\s+((can|do)\s+i|to)\s+((start|learn( to)?|get started)\s+)?(modding|mak(e|ing) mods?|mod making)/i, "Hey {{authorMention}}, here are some resources for getting started modding:\nDocumentation: https://docs.ficsit.app\nSatisfactory Headers: https://sf-headers.ficsit.app\nSDK Headers: https://sdk-headers.ficsit.app"],
 ]);
 
 
@@ -28,7 +28,7 @@ function main(): void {
     });
 
     client.on('message', (message) => {
-        if (message.author.bot) {
+        if (!isEligibleForResponse(message)) {
             return;
         }
         const response = respondToMessage(message);
@@ -39,6 +39,18 @@ function main(): void {
 
     const auth = require(process.cwd() + '/auth.json');
     client.login(auth.token);
+}
+
+
+export function isEligibleForResponse(message: Discord.Message): boolean {
+    if (message.author.bot) {
+        return false;
+    }
+    const authorRoles = message.member.roles;
+    if (authorRoles.size === 1 && authorRoles.first().name === '@everyone') {
+        return true;
+    }
+    return false;
 }
 
 

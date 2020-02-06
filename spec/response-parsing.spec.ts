@@ -95,6 +95,8 @@ describe('Response parsing', () => {
             'How do i get started modding?',
             'Can someone tell me how to start making mods?',
             'Where can I learn to make mods?',
+            'How do I start making mods?',
+            "how do i make mods?",
         ];
         
         for (const m of messages) {
@@ -109,7 +111,6 @@ describe('Response parsing', () => {
             "When is SML 2.0 coming out?",
             "Mods aren't working for me",
             "Somebody help, I'm lost in the forest",
-            "how do i make mods?",
             "I'm having trouble downloading mods",
         ];
         
