@@ -4,7 +4,6 @@ import * as Discord from 'discord.js';
 // Bot will only respond to messages in these channels
 const SUPPORTED_CHANNELS = new Set([
     'i-need-help',
-    'general',
 ]);
 
 const doesNotWorkRegexBase = "mods?\\s+((doesn't|don't|does not|not|are not|aren't)\\s+)?((work(ing|s)?|function(al|ing|s)?|compatible|support(ed)?)\\s+)?(in|with|on|for)\\s+(me (on|in)\\s+)?";

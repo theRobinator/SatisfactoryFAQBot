@@ -1,7 +1,8 @@
 FROM node:12.14.1
 
 WORKDIR /srv
-COPY package.json auth.json /srv/
+COPY package.json /srv/
 RUN npm install --prod-only
+COPY container-startup.sh /srv/container-startup.sh
 COPY dist /srv/dist
-ENTRYPOINT node /srv/dist/index.js
+ENTRYPOINT bash container-startup.sh

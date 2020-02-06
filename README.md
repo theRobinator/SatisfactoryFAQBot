@@ -25,3 +25,4 @@ This bot automatically responds to questions about Satisfactory modding.
 
 1. Compile the project as described above.
 2. `docker build -t satisfactory-faq-bot .`
+3. When running the container, supply the AUTH_TOKEN env var for the bot.
