@@ -1,11 +1,6 @@
 import * as Discord from 'discord.js';
 
 
-// Bot will only respond to messages in these channels
-const SUPPORTED_CHANNELS = new Set([
-    'i-need-help',
-]);
-
 const doesNotWorkRegexBase = "mods?\\s+((doesn't|don't|does not|not|are not|aren't)\\s+)?((work(ing|s)?|function(al|ing|s)?|compatible|support(ed)?)\\s+)?(in|with|on|for)\\s+(me (on|in)\\s+)?";
 
 // When a message is posted in a supported channel matching the regex, the bot will post the response value.
@@ -17,6 +12,7 @@ const RESPONSES = new Map<RegExp, string>([
     [/(where|how)\s+((can|do)\s+i|to)\s+(find|download|get)(\s+(the|a))?\s+mods?/i, 'Hey {{authorMention}}, you can find mods to download at https://ficsit.app'],
     [/((where|how)\s+((can|do)\s+i|to)|help\s*(me|(me\s*)?(with\s*)?)?)\s+(find(ing)?|download(ing)?|install(ing)?|get(ting)?|put|sav(e|ing))\s+(sml|xinput|satisfactory\s+mod\s+loader)/i, 'Hey {{authorMention}}, check out this video tutorial: https://www.youtube.com/watch?v=OTIIhwZG1Wk'],
     [/(where|how)\s+((can|do)\s+i|to)\s+((start|learn( to)?|get started)\s+)?(modding|mak(e|ing) mods?|mod making)/i, "Hey {{authorMention}}, here are some resources for getting started modding:\nDocumentation: https://docs.ficsit.app\nSatisfactory Headers: https://sf-headers.ficsit.app\nSDK Headers: https://sdk-headers.ficsit.app"],
+    [/(sml|loader|mod|kronos).*(ready|release|work|crash|load|start|error)/i, "Hi {{authorMention}}, mods don't currently work with update 3. The team is working on it, but no release date has been announced yet."],
 ]);
 
 
@@ -43,7 +39,7 @@ function main(): void {
 
 
 export function isEligibleForResponse(message: Discord.Message): boolean {
-    if (message.author.bot) {
+    if (message.author.bot || !message.member) {
         return false;
     }
     const authorRoles = message.member.roles;
@@ -55,7 +51,7 @@ export function isEligibleForResponse(message: Discord.Message): boolean {
 
 
 export function respondToMessage(message: Discord.Message): string|null {
-    if (message.channel instanceof Discord.TextChannel && SUPPORTED_CHANNELS.has(message.channel.name)) {
+    if (message.channel instanceof Discord.TextChannel) {
         const content = message.content;
         for (const [regex, response] of RESPONSES) {
             if (regex.exec(content)) {
