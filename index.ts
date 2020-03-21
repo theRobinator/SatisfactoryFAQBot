@@ -9,7 +9,7 @@ const RESPONSES = new Map<RegExp, string>([
     [/(where|how)\s+((can|do)\s+i|to)\s+(find|download|get)(\s+(the|a))?\s+mods?/i, 'Hey {{authorMention}}, you can find mods to download at https://ficsit.app'],
     [/((where|how)\s+((can|do)\s+i|to)|help\s*(me|(me\s*)?(with\s*)?)?)\s+(find(ing)?|download(ing)?|install(ing)?|get(ting)?|put|sav(e|ing))\s+(sml|xinput|satisfactory\s+mod\s+loader)/i, 'Hey {{authorMention}}, check out this video tutorial: https://www.youtube.com/watch?v=OTIIhwZG1Wk'],
     [/(where|how)\s+((can|do)\s+i|to)\s+((start|learn( to)?|get started)\s+)?(modding|mak(e|ing) mods?|mod making)/i, "Hey {{authorMention}}, here are some resources for getting started modding:\nDocumentation: https://docs.ficsit.app\nSatisfactory Headers: https://sf-headers.ficsit.app\nSDK Headers: https://sdk-headers.ficsit.app"],
-    [/kronos.*(ready|release|work|crash|load|start|error)/i, "Hi {{authorMention}}, the Kronos Mod hasn't been updated for update 3 yet. Kronos is working on it, but no release date has been announced. Pinging him won't make him work faster."],
+    [/kronos.*(ready|release|work|crash|load|start|error|broke|updat|mess)/i, "Hi {{authorMention}}, the Kronos Mod hasn't been updated for update 3 yet. Kronos is working on it, but no release date has been announced. Pinging him won't make him work faster."],
 ]);
 
 
