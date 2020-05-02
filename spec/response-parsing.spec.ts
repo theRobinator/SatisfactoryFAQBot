@@ -1,4 +1,4 @@
-import {respondToMessage} from '../index';
+import {respondToTextChannelMessage} from '../index';
 import * as Discord from 'discord.js'
 
 
@@ -33,7 +33,7 @@ describe('Response parsing', () => {
         
         for (const m of messages) {
             const messageObject = makeMessage(m);
-            expect(respondToMessage(messageObject)).toBe("Hey <@12345>, mods don't work in multiplayer yet. Wait for SML 1.1+ to come out.");
+            expect(respondToTextChannelMessage(messageObject)).toBe("Hey <@12345>, mods don't work in multiplayer yet. Wait for SML 1.1+ to come out.");
         }
     });
 
@@ -46,7 +46,7 @@ describe('Response parsing', () => {
         
         for (const m of messages) {
             const messageObject = makeMessage(m);
-            expect(respondToMessage(messageObject)).toBe("Hey <@12345>, mods don't work in experimental yet. Wait for SML 1.1+ to come out, and use Early Access until then.");
+            expect(respondToTextChannelMessage(messageObject)).toBe("Hey <@12345>, mods don't work in experimental yet. Wait for SML 1.1+ to come out, and use Early Access until then.");
         }
     });
 
@@ -62,7 +62,7 @@ describe('Response parsing', () => {
         
         for (const m of messages) {
             const messageObject = makeMessage(m);
-            expect(respondToMessage(messageObject)).toBe("Hey <@12345>, check out this video tutorial: https://www.youtube.com/watch?v=OTIIhwZG1Wk");
+            expect(respondToTextChannelMessage(messageObject)).toBe("Hey <@12345>, check out this video tutorial: https://www.youtube.com/watch?v=OTIIhwZG1Wk");
         }
     });
 
@@ -73,7 +73,7 @@ describe('Response parsing', () => {
         
         for (const m of messages) {
             const messageObject = makeMessage(m);
-            expect(respondToMessage(messageObject)).toBe("Did you get a message about missing SID_p from your install? You need to install Satisfactory Item Dictionary from https://ficsit.app/mod/CkUs5KM9ShwVfr");
+            expect(respondToTextChannelMessage(messageObject)).toBe("Did you get a message about missing SID_p from your install? You need to install Satisfactory Item Dictionary from https://ficsit.app/mod/CkUs5KM9ShwVfr");
         }
     });
 
@@ -86,7 +86,7 @@ describe('Response parsing', () => {
         
         for (const m of messages) {
             const messageObject = makeMessage(m);
-            expect(respondToMessage(messageObject)).toBe("Hey <@12345>, you can find mods to download at https://ficsit.app");
+            expect(respondToTextChannelMessage(messageObject)).toBe("Hey <@12345>, you can find mods to download at https://ficsit.app");
         }
     });
 
@@ -101,7 +101,7 @@ describe('Response parsing', () => {
         
         for (const m of messages) {
             const messageObject = makeMessage(m);
-            expect(respondToMessage(messageObject)).toBe("Hey <@12345>, here are some resources for getting started modding:\nDocumentation: https://docs.ficsit.app\nSatisfactory Headers: https://sf-headers.ficsit.app\nSDK Headers: https://sdk-headers.ficsit.app");
+            expect(respondToTextChannelMessage(messageObject)).toBe("Hey <@12345>, here are some resources for getting started modding:\nDocumentation: https://docs.ficsit.app\nSatisfactory Headers: https://sf-headers.ficsit.app\nSDK Headers: https://sdk-headers.ficsit.app");
         }
     });
 
@@ -116,7 +116,7 @@ describe('Response parsing', () => {
         
         for (const m of messages) {
             const messageObject = makeMessage(m);
-            expect(respondToMessage(messageObject)).toBe(null);
+            expect(respondToTextChannelMessage(messageObject)).toBe(null);
         }
     });
 });
